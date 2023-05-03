@@ -1,3 +1,5 @@
+package Search;
+
 public class DFSRecursion{
 
     // 각 노드가 연결된 정보를 2차원 배열 자료형으로 표현
