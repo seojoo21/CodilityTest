@@ -9,8 +9,8 @@ import java.util.Random;
 public class QuickSelect {
 
     public static void main(String[] args){
-        int[] nums = { 69, 10, 30, 2, 16, 8, 31, 22 };
-        System.out.println(quickSelect(nums, 0, nums.length-1, 3));
+        int[] nums = { 3,2,3,1,2,4,5,5,6 };
+        System.out.println(quickSelect(nums, 0, nums.length-1, 4));
     }
 
     public static void swap(int[] nums, int i, int j){
@@ -20,24 +20,26 @@ public class QuickSelect {
     }
 
     public static int partition(int[] nums, int left, int right){
-        int pivot = left + new Random().nextInt(right-left+1);
-        swap(nums, right, pivot);
-        for(int i=left; i<right; i++){
-            if(nums[i] > nums[right]){
-                swap(nums, i, left);
-                left++;
+        int pivotIdx = left + new Random().nextInt(right-left+1);
+        int pivot = nums[pivotIdx];
+        swap(nums, pivotIdx, right);
+        int idx = left;
+        for (int i = left; i < right; i++) {
+            if (nums[i] > pivot) {
+                swap(nums, idx, i);
+                idx++;
             }
         }
-        swap(nums, left, right);
-        return left;
+        swap(nums, idx, right);
+        return idx;
     }
 
     public static int quickSelect(int[] nums, int left, int right, int k){
         int pivot = partition(nums, left, right);
 
-        if(k == pivot){
-            return nums[k];
-        }else if(k < pivot){
+        if(k-1 == pivot){
+            return nums[pivot];
+        }else if(k-1 < pivot){
             return quickSelect(nums, left, pivot-1, k);
         }else{
             return quickSelect(nums, pivot+1, right, k);
